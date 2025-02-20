@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:08:07 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/19 18:46:23 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:59:14 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	**get_command(char *s, char **paths)
 	command_path = get_command_path(command[0], paths);
 	if (!command_path)
 		return (free_double_array(command));
-	free(command[0]);
 	command[0] = command_path;
 	return (command);
 }
@@ -82,6 +81,7 @@ t_args	*parsing(int ac, char **av, char **envp)
 	args->ac = ac;
 	args->av = av;
 	args->paths = ft_split(get_path(envp), ":");
+	args->command = NULL;
 	if (!args->paths)
 		return (free_args(args));
 	return (args);

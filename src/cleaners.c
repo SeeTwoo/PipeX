@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:48 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/20 12:05:01 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:48:16 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	**free_double_array(char **tab)
 
 t_args	*free_args(t_args *args)
 {
+	if (!args)
+		return (NULL);
 	if (args->paths)
 		free_double_array(args->paths);
 	if (args->command)
@@ -48,6 +50,20 @@ void	close_tab(int *tab, size_t size)
 	while (i < size)
 	{
 		close(tab[i]);
+		i++;
+	}
+}
+
+void	wait_tab(pid_t *tab, size_t size)
+{
+	size_t	i;
+
+	if (!tab)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		waitpid(tab[i], NULL, 0);
 		i++;
 	}
 }
