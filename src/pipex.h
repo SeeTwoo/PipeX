@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:11:38 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/20 12:48:55 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:51:40 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ struct s_args
 };
 
 void	close_tab(int *tab, size_t size);
-void	fail(t_args *args, char *msg, int pipefd[2]);
+void	fail(t_args *args, char *msg, int pipefd[2], int fd);
 t_args	*free_args(t_args *args);
 char	**free_double_array(char **tab);
 char	**get_command(char *s, char **paths);
