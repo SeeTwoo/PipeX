@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:05:54 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/19 17:26:07 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/20 11:45:41 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int ac, char **av, char **envp)
 {
 	int		pipefd[2];
-	int		pid[2];
+	pid_t	pid[2];
 	t_args	*args;
 
 	args = parsing(ac, av, envp);
@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **envp)
 		fail(args, "PipeX: fork failed\n", pipefd);
 	if (pid[0] == 0)
 		input(args, pipefd);
-	pid[0] = fork();
+	pid[1] = fork();
 	if (pid[1] == -1)
 		fail(args, "PipeX: fork failed\n", pipefd);
 	if (pid[1] == 0)
