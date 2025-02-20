@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:08:07 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/20 12:59:14 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:59:38 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_command_path(char *command, char **paths)
 {
 	char	*current_path;
 	char	*temp;
-	
+
 	if (access(command, X_OK) == 0)
 		return (command);
 	temp = ft_strjoin("/", command);
