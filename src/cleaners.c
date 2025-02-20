@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:48 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/19 18:22:46 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:05:01 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	**free_double_array(char **tab)
 	{
 		free(tab[i]);
 		i++;
-		ft_printf("lap\n");
 	}
 	free(tab);
 	return (NULL);
@@ -34,7 +33,7 @@ t_args	*free_args(t_args *args)
 	if (args->paths)
 		free_double_array(args->paths);
 	if (args->command)
-		free_double_array(args->paths);
+		free_double_array(args->command);
 	free(args);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:05:54 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/20 11:45:41 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:03:31 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ int	main(int ac, char **av, char **envp)
 	close_tab(pipefd, 2);
 	waitpid(pid[0], NULL, 0);
 	waitpid(pid[1], NULL, 0);
+	free_args(args);
+	return (0);
 }
