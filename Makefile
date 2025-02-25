@@ -13,7 +13,12 @@ SRC_FILES = cleaners.c \
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 SRC_BNS_DIR = src_bns
-SRC_BNS_FILES = 
+SRC_BNS_FILES = cleaners.c \
+				exec.c \
+				init.c \
+				main.c \
+				parsing.c \
+				pids_n_pipes.c
 SRC_BNS = $(addprefix $(SRC_BNS_DIR)/, $(SRC_BNS_FILES))
 
 
@@ -35,6 +40,12 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_BNS_DIR):
+	mkdir -p $(OBJ_BNS_DIR)
+
+$(OBJ_BNS_DIR)/%.o: $(SRC_BNS_DIR)/%.c | $(OBJ_BNS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIB_NAME):

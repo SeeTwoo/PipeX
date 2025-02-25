@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 08:12:38 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/25 13:28:10 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:33:46 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@ int	*close_pipes(int *pipefd, int pipe_nb)
 	return (NULL);
 }
 
-int	*create_pipes(int *pipefd, int *pipe_nb, int ac, char **av)
+int	*create_pipes(t_args *args)
 {
 	int	i;
 
-	*pipe_nb = ac - 4;
-	pipefd = malloc(sizeof(int) * ((pipe_nb * 2) + 2))
-	if (!pipefd)
+	args->pipe_nb = ac - 4;
+	args->pipefd = malloc(sizeof(int) * ((args->pipe_nb * 2) + 2));
+	if (!args->pipefd)
 		return (NULL);
 	i = 0;
-	while ((i < (*pipe_nb * 2) + 2)
-		pipefd[i++] = -1;
-	pipefd[0] = open(av[1], O_RDONLY);
+	while (i < ((args->pipe_nb * 2) + 2))
+		args->pipefd[i++] = -1;
+	args->pipefd[0] = open(args->av[1], O_RDONLY);
 	i = 1;
-	while ((i < *pipe_nb)
-		if (pipe(&pipefd[i++ * 2]) == -1)
-			return (close_pipes(pipefd, *pipe_nb);								//some free later
-	pipefd[(i * 2) + 1] = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT)
+	while (i < args->pipe_nb)
+		if (pipe(&(args->pipefd)[i++ * 2]) == -1)
+			return (close_pipes(args->pipefd, args->pipe_nb));					//some free later
+	args->pipefd[(i * 2) + 1] = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT);
 	return (pipefd);
 }
 
@@ -50,9 +50,11 @@ void	wait_pids(int *pids, int pid_nb)
 {
 	int	i;
 
+	if (!pids)
+		return ;
 	i = 0;
 	while (i < pid_nb)
-		wait_pid(pids[i++]);
+		waitpid(pids[i++], NULL, 0);
 }
 
 int	*create_pids(int *pids, int *pid_nb, int ac)

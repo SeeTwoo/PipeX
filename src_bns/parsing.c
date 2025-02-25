@@ -6,11 +6,11 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:08:07 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/25 14:09:39 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:51:28 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 char	*get_command_path(char *command, char **paths)
 {
@@ -40,17 +40,16 @@ char	*get_command_path(char *command, char **paths)
 
 void	get_command(t_args *args, int i)
 {
-	char	**command;
 	char	*command_path;
 
-	command = ft_split(args->av[i + 2], " ");
-	if (access(command[0], X_OK) == 0)
-		return (command);
-	command_path = get_command_path(command[0], paths);
+	args->command = ft_split(args->av[i + 2], " ");
+	command_path = get_command_path(args->command[0], args->paths);
 	if (!command_path)
-		return (free_double_array(command));
-	command[0] = command_path;
-	return (command);
+	{
+		free_double_array(args->command);
+		return ;
+	}
+	args->command[0] = command_path;
 }
 
 char	*get_path(char **envp)
@@ -69,16 +68,18 @@ char	*get_path(char **envp)
 	return (path);
 }
 
-t_args	*parsing(int ac, char **av, char **envp, t_args *args)
+void	parsing(int ac, char **av, char **envp, t_args *args)
 {
 	args = malloc(sizeof(t_args));
 	if (!args || ac != 5)
-		return (NULL);
+		return ; 
 	args->ac = ac;
 	args->av = av;
 	args->paths = ft_split(get_path(envp), ":");
 	args->command = NULL;
 	if (!args->paths)
-		return (free_args(args));
-	return (args);
+	{
+		clean(args);
+		return ;
+	}
 }

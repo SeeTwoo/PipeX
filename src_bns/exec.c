@@ -6,11 +6,11 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 18:51:40 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/25 14:22:07 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:26:50 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	fail(t_args *args)
 {
@@ -26,10 +26,9 @@ void	exec_command(t_args *args, int i)
 	get_command(args, i);
 	dup2(fds[0], STDIN_FILENO);
 	dup2(fds[1], STDOUT_FILENO);
-	close_tab(fds, 2);
+	close_pipes(fds, 2);
 	execve(args->command[0], args->command, NULL);
-	perror
-	fail(args);
+	fail(args);											//add some error msg later
 }
 
 void	exec(t_args *args)
@@ -38,5 +37,10 @@ void	exec(t_args *args)
 
 	i = 0;
 	while (i < *(args->pipe_nb))
-		exec_command(args, i++);
+	{
+		args->pids[i] = fork();
+		if (args->pids[i] == 0)
+			exec_command(args, i);
+		i++;
+	}
 }

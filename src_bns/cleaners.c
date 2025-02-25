@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cleaners.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 17:52:12 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/25 16:27:49 by wbeschon         ###   ########.fr       */
+/*   Created: 2025/02/25 15:52:51 by wbeschon          #+#    #+#             */
+/*   Updated: 2025/02/25 17:15:05 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	main(int ac, char **av, char **envp)
+void	free_double_array(char **tab)
 {
-	t_args	*args;
+	int	i;
 
-	args = NULL;
-	init(args, ac, av, envp);
-	exec(args);
-	clean(args);
-	return (0);
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
+}
+
+void	clean(t_args *args)
+{
+	free_double_array(args->paths);
+	free_double_array(args->command);
+	free(args->pipefd);
+	free(args->pids);
 }
