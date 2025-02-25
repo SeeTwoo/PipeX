@@ -1,0 +1,1 @@
+char	*err_msg()

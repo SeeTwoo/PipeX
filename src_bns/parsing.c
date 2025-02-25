@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:08:07 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/21 14:50:23 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:09:39 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,12 @@ char	*get_command_path(char *command, char **paths)
 	return (command);
 }
 
-char	**get_command(char *s, char **paths)
+void	get_command(t_args *args, int i)
 {
 	char	**command;
 	char	*command_path;
 
-	command = ft_split(s, " ");
-	if (!command || !command[0])
-		return (free_double_array(command));
+	command = ft_split(args->av[i + 2], " ");
 	if (access(command[0], X_OK) == 0)
 		return (command);
 	command_path = get_command_path(command[0], paths);
@@ -61,10 +59,7 @@ char	*get_path(char **envp)
 	int		i;
 
 	if (!envp)
-	{
-		printf("no environment found\n");
 		return (NULL);
-	}
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
@@ -74,10 +69,8 @@ char	*get_path(char **envp)
 	return (path);
 }
 
-t_args	*parsing(int ac, char **av, char **envp)
+t_args	*parsing(int ac, char **av, char **envp, t_args *args)
 {
-	t_args	*args;
-
 	args = malloc(sizeof(t_args));
 	if (!args || ac != 5)
 		return (NULL);
