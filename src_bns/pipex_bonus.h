@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 12:03:05 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/25 17:28:59 by wbeschon         ###   ########.fr       */
+/*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
+/*   Updated: 2025/02/26 13:13:23 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,14 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-# define ERR_PROMPT "PipeX:"
-
 typedef struct s_args	t_args;
 
 struct s_args
 {
-	int		ac;
-	char	**av;
+	int		command_number;
 	char	**paths;
 	char	**command;
-	int		*pipefd;
-	int		pipe_nb;
-	pid_t	*pids;
-	int		pid_nb;
+	int		*fds;
 };
-
-void	clean(t_args *args);
-int		*close_pipes(int *pipefd, int pipe_nb);
-int		*create_pids(t_args *args);
-int		*create_pipes(t_args *args);
-void	exec(t_args *args);
-void	fail(t_args *args);
-void	free_double_array(char **tab);
-void	get_command(t_args *args, int i);
-int		init(t_args *args, int ac, char **av, char **envp);
-void	parsing(int ac, char **av, char **envp, t_args *args);
 
 #endif

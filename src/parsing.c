@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:08:07 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/21 14:50:23 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:17:31 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*get_path(char **envp)
 	char	*path;
 	int		i;
 
-	if (!envp)
+	if (!envp[0])
 	{
 		printf("no environment found\n");
 		return (NULL);

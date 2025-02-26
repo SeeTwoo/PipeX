@@ -13,17 +13,13 @@ SRC_FILES = cleaners.c \
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 SRC_BNS_DIR = src_bns
-SRC_BNS_FILES = cleaners.c \
-				exec.c \
-				init.c \
-				main.c \
-				parsing.c \
-				pids_n_pipes.c
+SRC_BNS_FILES = main.c
 SRC_BNS = $(addprefix $(SRC_BNS_DIR)/, $(SRC_BNS_FILES))
 
 
 OBJ_DIR = obj
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+%.o = %.c
 
 OBJ_BNS_DIR = obj_bns
 OBJ_BNS = $(SRC_BNS:$(SRC_BNS_DIR)%.c=$(OBJ_BNS_DIR)%.o)

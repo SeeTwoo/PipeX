@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:47:09 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/25 14:03:06 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:23:18 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**ft_split(char const *s, char *sep)
 	int		i;
 
 	array = malloc(sizeof(char *) * (count_words(s, sep) + 1));
-	if (!array)
+	if (!array || !s)
 		return (NULL);
 	s_dup = ft_strdup(s);
 	if (!s_dup)

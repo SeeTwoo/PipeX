@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:55:42 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/19 09:23:42 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:46:42 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <limits.h>
+# include "ft_colors.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
