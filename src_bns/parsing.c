@@ -6,11 +6,45 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/27 13:23:40 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:17:31 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+char	*get_command_path(char *s, char **paths)
+{
+	char	*temp;
+	char	*current_path;
+
+	if (!paths || access(s, X_OK) == 0)
+		return (s);
+	temp = ft_strjoin("/", s);
+	if (!temp)
+		return (s);
+	while (*paths)
+	{
+		current_path = ft_strjoin(*paths, temp);
+		if (access(current_path, X_OK) == 0)
+			return (current_path);
+		free(current_path);
+		paths++;
+	}
+	free(temp);
+	return (s);
+}
+
+char	**get_command(char *s, char **paths)
+{
+	char	**command;
+	char	*command_path;
+
+	command = ft_split(s, " ");
+	command_path = get_command_path(command[0], paths);
+	free(command[0]);
+	command[0] = command_path;
+	return (command);
+}
 
 char	*get_path(char **envp)
 {
