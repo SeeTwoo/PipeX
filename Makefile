@@ -13,7 +13,11 @@ SRC_FILES = cleaners.c \
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 SRC_BNS_DIR = src_bns
-SRC_BNS_FILES = main.c
+SRC_BNS_FILES = cleaners.c \
+				init.c \
+				main.c \
+				parsing.c \
+				printing.c
 SRC_BNS = $(addprefix $(SRC_BNS_DIR)/, $(SRC_BNS_FILES))
 
 

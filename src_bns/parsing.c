@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 12:40:21 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/27 12:51:47 by wbeschon         ###   ########.fr       */
+/*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
+/*   Updated: 2025/02/27 12:56:28 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	main(int ac, char **av, char **envp)
+char	*get_path(char **envp)
 {
-	t_args	*args;
+	while (*envp && ft_strncmp(*envp, "PATH=", 5) != 0)
+		envp++;
+	if (!(*envp))
+		return (NULL);
+	return (&((*envp)[5]));
+}
 
-	if (ac != 5)
-		return (0);
-	args = NULL;
-	init(&args, ac, av, envp);
-	ft_printf("%spaths are :%s\n\n", BYELLOW, RESET);
-	print_double_array(args->paths);
-	ft_printf("%sfds are :%s\n\n", BYELLOW, RESET);
-	print_int_array(args->fds, 4);
-	clean(args);
-	return (0);
+int	get_command_number(int ac, char **av)
+{
+	if (ft_strncmp(av[1], "here_doc", 8) == 0)
+		return (ac - 4);
+	else
+		return (ac - 3);
+}
+
+char	*get_infile(char **av)
+{
+	return (av[1]);
 }
