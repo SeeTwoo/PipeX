@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:47:44 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/27 12:48:00 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:21:54 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	print_double_array(char **array)
 {
+	if (!array)
+		return ;
 	while (*array)
 	{
 		ft_printf("%s\n", *array);
@@ -26,6 +28,8 @@ void	print_int_array(int *array, int size)
 {
 	int	i;
 
+	if (!array)
+		return ;
 	i = 0;
 	while (i < size)
 	{

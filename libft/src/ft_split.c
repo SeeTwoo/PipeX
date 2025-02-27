@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:47:09 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/19 15:23:18 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:47:08 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ char	**ft_split(char const *s, char *sep)
 	char	*token;
 	int		i;
 
-	array = malloc(sizeof(char *) * (count_words(s, sep) + 1));
-	if (!array || !s)
+	if (!s)
 		return (NULL);
+	array = malloc(sizeof(char *) * (count_words(s, sep) + 1));
 	s_dup = ft_strdup(s);
-	if (!s_dup)
-		return (free_split(array, 0, NULL));
+	if (!s_dup || !array)
+		return (free_split(array, 0, s_dup));
 	token = ft_strtok(s_dup, sep);
 	i = 0;
 	while (token)

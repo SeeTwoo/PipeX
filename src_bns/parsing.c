@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/27 12:56:28 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:23:40 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*get_path(char **envp)
 {
+	if (!envp[0])
+		return (NULL);
 	while (*envp && ft_strncmp(*envp, "PATH=", 5) != 0)
 		envp++;
 	if (!(*envp))

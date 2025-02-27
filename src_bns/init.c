@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:51:57 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/27 13:08:52 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:43:21 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	init(t_args **args, int ac, char **av, char **envp)
 	(*args)->paths = ft_split(get_path(envp), ":");
 	(*args)->command = NULL;
 	(*args)->fds = get_fds(ac, av, (*args)->command_number);
-	if (!(*args)->paths || !(*args)->fds)
+	if (!(*args)->fds)
 		fail(*args, "init failed: ", "try again and hope for the best\n");
 }
