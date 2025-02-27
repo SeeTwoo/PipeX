@@ -23,3 +23,11 @@ main
 |	|	|	exec a command in the child process (needs the av field, the fds and the split PATH
 |	|	|	|	split the string with the command and its arguments
 |	|	|	|	find the path to the command using the first field and the split path
+
+
+
+cat             grep          wc -l
+
+   	      pipe1         pipe2
+
+infile   in | out      in | out     outfile
