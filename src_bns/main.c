@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:40:21 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/27 16:46:24 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:55:00 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av, char **envp)
 		return (0);
 	args = NULL;
 	init(&args, ac, av, envp);
-	pipeline(args, av);
+	pipeline(args, get_first_command(av, args->hd_status));
 	clean(args);
 	return (0);
 }

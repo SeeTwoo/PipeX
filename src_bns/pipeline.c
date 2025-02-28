@@ -6,13 +6,13 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/27 19:00:14 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:29:12 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-char	**first_command(char **av, int hd_status)
+char	**get_first_command(char **av, int hd_status)
 {
 	if (hd_status == 1)
 		return (&av[3]);
@@ -30,23 +30,30 @@ void	exec(t_args *args, int in, int out, char *command)
 	fail(args, "command not found: ", args->command[0]);
 }
 
-void	pipeline(t_args *args, char **av)
+void	setup_exec(t_args *args, int i, char **av)
+{
+	if (i == 0)
+		exec(args, args->in, args->pipes[0][1], av[i]);
+	else if (i == args->command_number - 1)
+		exec(args, args->pipes[i - 1][0], args->out, av[i]);
+	else
+		exec(args, args->pipes[i - 1][0], args->pipes[i][1], av[i]);
+}
+
+void	pipeline(t_args *args, char **commands)
 {
 	int		i;
-	int		*pids;
 
 	i = 0;
-	pids = malloc(sizeof(int) * args->command_number);
-	av = first_command(av, args->hd_status);
 	while (i < args->command_number)
 	{
-		pids[i] = fork();
-		if (i == 0)
-		if (pids[i] == 0)
-			exec(args, &(args->fds[i * 2]), av_commands[i]);
+		args->pids[i] = fork();
+		if (args->pids[i] == 0)
+			setup_exec(args, i, commands);
 		i++;
 	}
-	i--;
-	while (i >= 0)
-		waitpid(pids[i++], NULL, 0);
+	while (--i >= 0)
+		waitpid(args->pids[i], NULL, 0);
+	ft_printf("done waiting \n");
+	return ;
 }

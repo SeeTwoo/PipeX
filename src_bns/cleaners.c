@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/27 13:05:52 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:49:16 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,19 @@ void	free_double_array(char **array)
 
 	i = 0;
 	while (array[i])
-		free(array[i++]);
+		i++;
+		//free(array[i++]);
 	free(array);
+}
+
+int	**free_pipes(int **pipes, int i)
+{
+	if (!pipes)
+		return (NULL);
+	while (i >= 0)
+		free(pipes[i--]);
+	free(pipes);
+	return (NULL);
 }
 
 void	clean(t_args *args)
@@ -30,18 +41,22 @@ void	clean(t_args *args)
 		free_double_array(args->paths);
 	if (args->command)
 		free_double_array(args->command);
-	if (args->fds)
-		free(args->fds);
+	if (args->pipes)
+		free_pipes(args->pipes, args->command_number);
+	if (args->pids)
+		free(args->pids);
 	free(args);
 }
 
 void	fail(t_args *args, char *msg1, char *msg2)
 {
 	clean(args);
-	perror(REDBG);
-	perror("PipeX:");
-	perror(RESET);
-	perror(msg1);
-	perror(msg2);
+	ft_putstr_fd(REDBG, 2);
+	ft_putstr_fd("PipeX:", 2);
+	ft_putstr_fd(RESET, 2);
+	ft_putstr_fd(" ", 2);
+	ft_putstr_fd(msg1, 2);
+	ft_putstr_fd(msg2, 2);
+	ft_putstr_fd("\n", 2);
 	exit(EXIT_FAILURE);
 }
