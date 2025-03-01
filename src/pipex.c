@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 18:51:40 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/20 15:53:14 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:09:20 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	output(t_args *args, int pipefd[2])
 		fail(args, "\e[41mPipeX:\e[0m output file opening failed\n", pipefd, -1);
 	args->command = get_command(args->av[3], args->paths);
 	if (!args->command)
-		fail(args, "\e[41mPipeX:\e[0m output command parsing failed\n", pipefd, out_fd);
+		fail(args, "\e[41mPipeX:\e[0m command parsing failed\n", pipefd, out_fd);
 	if (dup2(out_fd, STDOUT_FILENO) == -1)
-		fail(args, "\e[41mPipeX:\e[0m outfile redirection failed\n", pipefd, out_fd);
+		fail(args, "\e[41mPipeX:\e[0m file redirection failed\n", pipefd, out_fd);
 	if (dup2(pipefd[0], STDIN_FILENO) == -1)
 		fail(args, "\e[41mPipeX:\e[0m pipe  redirection failed\n", pipefd, out_fd);
 	close(out_fd);

@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:51:57 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/28 16:38:04 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:10:22 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	get_in_fd(t_args *args, int ac, char **av)
 		return (heredoc(av[2]));
 }
 
-int	**get_pipes(int	size)
+int	**get_pipes(int size)
 {
 	int	**pipes;
 	int	i;
-	
+
 	pipes = malloc(sizeof(int *) * (size + 1));
 	i = 0;
 	while (i < size)

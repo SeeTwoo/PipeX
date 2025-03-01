@@ -18,8 +18,7 @@ SRC_BNS_FILES = cleaners.c \
 				heredoc.c \
 				main.c \
 				parsing.c \
-				pipeline.c \
-				printing.c
+				pipeline.c
 SRC_BNS = $(addprefix $(SRC_BNS_DIR)/, $(SRC_BNS_FILES))
 
 

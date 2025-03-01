@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/01 12:37:02 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:10:47 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	free_double_array(char **array)
 	i = 0;
 	while (array[i])
 		i++;
-		//free(array[i++]);
 	free(array);
 }
+		//free(array[i++]);
 
 int	**free_pipes(int **pipes, int i)
 {
