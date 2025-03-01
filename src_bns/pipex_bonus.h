@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/28 14:54:15 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:50:40 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ struct s_args
 };
 
 void	clean(t_args *args);
+void	close_all(t_args *args);
 void	exec(t_args *args, int in, int out, char *command);
 void	fail(t_args *args, char *msg1, char *msg2);
 char	**get_first_command(char **av, int hd_status);

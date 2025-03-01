@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:54:44 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/28 15:22:42 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/28 17:36:02 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	heredoc(char *limiter)
 	state = 1;
 	while (state)
 	{
-		ft_putstr_fd("\rheredoc> ", 2);
+		ft_putstr_fd("\rheredoc> ", 1);
 		line = get_next_line(0);
 		if (ft_strncmp(line, limiter, lim_len) != 0)
 			ft_putstr_fd(line, hd_pipe[1]);
@@ -40,5 +40,6 @@ int	heredoc(char *limiter)
 		free(line);
 	}
 	close(hd_pipe[1]);
+	get_next_line(-2);
 	return (hd_pipe[0]);
 }

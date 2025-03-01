@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/27 16:17:31 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:58:23 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,4 @@ int	get_command_number(int ac, char **av)
 		return (ac - 4);
 	else
 		return (ac - 3);
-}
-
-char	*get_infile(char **av)
-{
-	return (av[1]);
 }

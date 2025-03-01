@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:51:57 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/28 15:24:18 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:38:04 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	**get_pipes(int	size)
 	i = 0;
 	while (i < size)
 	{
-		ft_printf("creating a pipe \n");
 		pipes[i] = malloc(sizeof(int) * 2);
 		if (!pipes[i])
 			return (free_pipes(pipes, i));
