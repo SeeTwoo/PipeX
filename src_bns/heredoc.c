@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:54:44 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/28 17:36:02 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:23:09 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int	heredoc(char *limiter)
 		free(line);
 	}
 	close(hd_pipe[1]);
-	get_next_line(-2);
+//	get_next_line(-2);
 	return (hd_pipe[0]);
 }
