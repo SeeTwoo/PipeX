@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/01 14:26:27 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 13:08:31 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,10 @@ void	close_all(t_args *args)
 	}
 }
 
-void	fail(t_args *args, char *msg1, char *msg2)
+void	fail(t_args *args, char *msg)
 {
-	ft_putstr_fd(REDBG, 2);
-	ft_putstr_fd("PipeX:", 2);
-	ft_putstr_fd(RESET, 2);
-	ft_putstr_fd(" ", 2);
-	ft_putstr_fd(msg1, 2);
-	ft_putstr_fd(msg2, 2);
-	ft_putstr_fd("\n", 2);
+	if (msg)
+		perror(msg);
 	clean(args);
 	exit(EXIT_FAILURE);
 }

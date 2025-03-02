@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/01 12:35:27 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:46:26 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,30 @@ void	exec(t_args *args, int in, int out, char *command)
 	dup2(out, STDOUT_FILENO);
 	close_all(args);
 	execve(args->command[0], args->command, NULL);
-	fail(args, "command not found: ", args->command[0]);
+	fail(args, "PipeX: command not found");
 }
 
 void	setup_exec(t_args *args, int i, char **av)
 {
 	if (i == 0)
+	{
+		if (args->hd_status == 0)
+			args->in = open(av[-1], O_RDONLY);
+		if (args->in == -1)
+			fail(args, "Pipex: file error");
 		exec(args, args->in, args->pipes[0][1], av[i]);
+	}
 	else if (i == args->command_number - 1)
+	{
+		if (args->hd_status == 1)
+			args->out = open(av[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else
+			args->out = open(av[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (args->out == -1)
+			fail(args, "PipeX: file error");
 		exec(args, args->pipes[i - 1][0], args->out, av[i]);
-	else
-		exec(args, args->pipes[i - 1][0], args->pipes[i][1], av[i]);
+	}
+	exec(args, args->pipes[i - 1][0], args->pipes[i][1], av[i]);
 }
 
 void	pipeline(t_args *args, char **commands)
