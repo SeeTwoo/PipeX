@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/28 16:58:23 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:48:14 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*get_command_path(char *s, char **paths)
 	char	*temp;
 	char	*current_path;
 
-	if (!paths || access(s, X_OK) == 0)
-		return (s);
 	temp = ft_strjoin("/", s);
 	if (!temp)
 		return (s);
@@ -26,7 +24,10 @@ char	*get_command_path(char *s, char **paths)
 	{
 		current_path = ft_strjoin(*paths, temp);
 		if (access(current_path, X_OK) == 0)
+		{
+			free(temp);
 			return (current_path);
+		}
 		free(current_path);
 		paths++;
 	}
@@ -39,9 +40,14 @@ char	**get_command(char *s, char **paths)
 	char	**command;
 	char	*command_path;
 
+	if (!s[0])
+		return (NULL);
 	command = ft_split(s, " ");
+	if (!command)
+		return (NULL);
+	if (command[0][0] == '/' || !paths)
+		return (command);
 	command_path = get_command_path(command[0], paths);
-	free(command[0]);
 	command[0] = command_path;
 	return (command);
 }

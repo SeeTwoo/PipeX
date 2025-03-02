@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 15:46:26 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:49:33 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	**get_first_command(char **av, int hd_status)
 void	exec(t_args *args, int in, int out, char *command)
 {
 	args->command = get_command(command, args->paths);
+	if (!args->command)
+		fail(args, "PipeX: command not found");
 	dup2(in, STDIN_FILENO);
 	dup2(out, STDOUT_FILENO);
 	close_all(args);
