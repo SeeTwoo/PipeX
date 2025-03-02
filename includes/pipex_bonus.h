@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 18:21:54 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 22:27:30 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ struct s_args
 {
 	int		hd_status;
 	int		command_number;
-	char	**paths;
-	char	**command;
-	int		**pipes;
-	int		*pids;
 	int		in;
 	int		out;
+	int		ac;
+	char	**av;
+	char	**envp;
 };
 
 void	clean(t_args *args);
