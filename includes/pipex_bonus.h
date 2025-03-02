@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 13:09:03 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 18:21:54 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_BONUS_H
 
 # include "libft.h" 
+# include <errno.h>
 # include <sys/types.h>
 # include <stdio.h>
 # include <sys/wait.h>
@@ -48,7 +49,7 @@ char	*get_infile(char **av);
 char	*get_path(char **envp);
 int		heredoc(char *limiter);
 int		heredoc_status(char **av);
-void	init(t_args **args, int ac, char **av, char **envp);
+void	init(t_args *args, int ac, char **av, char **envp);
 void	pipeline(t_args *args, char **av);
 void	print_double_array(char **array);
 void	print_int_array(int *array, int size);

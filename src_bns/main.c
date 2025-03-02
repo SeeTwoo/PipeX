@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:40:21 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 16:17:09 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 18:20:31 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ void	usage(int ac, char **av)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_args	*args;
+	t_args	args;
 
-	args = NULL;
 	usage(ac, av);
 	init(&args, ac, av, envp);
-	pipeline(args, get_first_command(av, args->hd_status));
-	clean(args);
+	pipeline(&args, get_first_command(av, args.hd_status));
+	clean(&args);
 	return (0);
 }
