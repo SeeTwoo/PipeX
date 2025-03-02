@@ -6,11 +6,37 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:51:57 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 22:11:51 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/02 23:23:36 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+char	*get_path(char **envp)
+{
+	if (!envp[0])
+		return (NULL);
+	while (*envp && ft_strncmp(*envp, "PATH=", 5) != 0)
+		envp++;
+	if (!(*envp))
+		return (NULL);
+	return (&((*envp)[5]));
+}
+
+int	get_command_number(int ac, char **av)
+{
+	if (ft_strncmp(av[1], "here_doc", 8) == 0)
+		return (ac - 4);
+	else
+		return (ac - 3);
+}
+
+char	**get_first_command(char **av, int hd_status)
+{
+	if (hd_status == 1)
+		return (&av[3]);
+	return (&av[2]);
+}
 
 int	**get_pipes(int size)
 {
@@ -34,8 +60,14 @@ int	**get_pipes(int size)
 
 void	init(t_args *args, int ac, char **av, char **envp)
 {
-	args->hd_status = heredoc_status(av);
+	if (ft_strcmp(av[1], "here_doc") == 0)
+		args->hd_status = 1;
+	else
+		args->hd_status = 0;
 	args->command_number = get_command_number(ac, av);
+	args->ac = ac;
+	args->commands = get_first_command(av, args->hd_status);
+	args->paths = get_paths(envp);
 	if (args->hd_status == 1)
 	{
 		args->in = heredoc(av[2]);

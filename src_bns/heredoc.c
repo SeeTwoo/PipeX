@@ -6,18 +6,11 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:54:44 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 16:32:05 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 22:31:57 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-int	heredoc_status(char **av)
-{
-	if (ft_strncmp(av[1], "here_doc", 8) == 0)
-		return (1);
-	return (0);
-}
 
 int	heredoc(char *limiter)
 {

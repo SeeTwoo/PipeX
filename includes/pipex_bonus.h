@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 22:27:30 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/02 22:39:52 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ struct s_args
 	int		out;
 	int		ac;
 	char	**av;
-	char	**envp;
+	char	*paths;
 };
 
 void	clean(t_args *args);
