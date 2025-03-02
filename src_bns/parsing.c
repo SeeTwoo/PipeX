@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 23:10:24 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/02 23:43:12 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_command_path(char *s, char *paths)
 	char	*paths_dup;
 	char	*current_path;
 
-	paths_dup = ft_strdup(paths)
+	paths_dup = ft_strdup(paths);
 	temp = ft_strjoin("/", s);
 	if (!temp || !paths_dup)
 		return (free(paths_dup), free(temp), NULL);

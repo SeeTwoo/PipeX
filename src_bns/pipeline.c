@@ -6,35 +6,40 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 23:26:18 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/02 23:50:55 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	exec(t_args *args, int in, int out, char *command)
+void	exec(t_args *args, int in, int out, char *s_cmd)
 {
-	args->command = get_command(command, args->paths);
-	if (!args->command)
-		fail(args, "PipeX: parsing failed");
+	char	**command;
+
+	command = get_command(s_cmd, args->paths);
+	if (!command)
+		error("PipeX: parsing failed");
 	dup2(in, STDIN_FILENO);
 	dup2(out, STDOUT_FILENO);
-	close_all(args);
-	execve(args->command[0], args->command, NULL);
-	fail(args, "PipeX: command not found");
+	close(args->in);
+	close(args->out);
+	close(in);
+	close(out);
+	execve(command[0], command, NULL);
+	error("PipeX: command not found");
 }
 
-void	setup_exec(t_args *args, int i)
+void	setup_exec(t_args *args, int **pipes, int i)
 {
 	if (i == 0 && args->in == -1)
 		error("infile");
 	else
-		exec(args, args->in, args->pipes[0][1], args->commands[i]);
+		exec(args, args->in, pipes[0][1], args->commands[i]);
 	if (i == args->command_number - 1 && args->out == -1)
 		error("outfile");
 	else
-		exec(args, args->pipes[i - 1][0], args->out, args->commands[i]);
-	exec(args, args->pipes[i - 1][0], args->pipes[i][1], args->commands[i]);
+		exec(args, pipes[i - 1][0], args->out, args->commands[i]);
+	exec(args, pipes[i - 1][0], pipes[i][1], args->commands[i]);
 }
 
 void	pipeline(t_args *args)
@@ -52,10 +57,10 @@ void	pipeline(t_args *args)
 	{
 		pids[i] = fork();
 		if (pids[i] == 0)
-			setup_exec(args, i);
+			setup_exec(args, pipes, i);
 		i++;
 	}
-	close_all(args);
+	close_all(args, pipes);
 	while (--i >= 0)
 		waitpid(pids[i], NULL, 0);
 	return ;

@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:51:57 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 23:23:36 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/02 23:41:53 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	init(t_args *args, int ac, char **av, char **envp)
 	args->command_number = get_command_number(ac, av);
 	args->ac = ac;
 	args->commands = get_first_command(av, args->hd_status);
-	args->paths = get_paths(envp);
+	args->paths = get_path(envp);
 	if (args->hd_status == 1)
 	{
 		args->in = heredoc(av[2]);
