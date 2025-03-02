@@ -6,7 +6,7 @@
 /*   By: walter <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:11:49 by walter            #+#    #+#             */
-/*   Updated: 2024/11/29 11:34:58 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:52:38 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	while (*s)
-	{
-		write(fd, s, 1);
-		s++;
-	}
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
 }
 
 /*int	main(void)

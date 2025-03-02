@@ -1,6 +1,6 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ilibft/src
-DFLAGS = -Wall -Wextra -Werror -Ilibft/src -g
+CFLAGS = -Wall -Wextra -Werror -Ilibft/includes -Iincludes
+DFLAGS = $(CFLAGS) -g
 
 LIB_DIR = libft
 LIB_NAME = $(LIB_DIR)/libft.a

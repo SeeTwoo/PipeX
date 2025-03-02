@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:56:40 by wbeschon          #+#    #+#             */
-/*   Updated: 2024/11/29 11:28:12 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:49:49 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	size_t			i;
 	unsigned char	*str;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	str = (unsigned char *)s;
 	while (i < n)

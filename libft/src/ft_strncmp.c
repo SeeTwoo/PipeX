@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:55:21 by wbeschon          #+#    #+#             */
-/*   Updated: 2024/11/26 15:59:22 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 17:31:42 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned int	i;
 
+	if (!s1 || !s2)
+		return (0);
 	i = 0;
 	while ((s1[i] || s2[i]) && i < n)
 	{

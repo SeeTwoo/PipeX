@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:00:27 by wbeschon          #+#    #+#             */
-/*   Updated: 2024/11/26 11:03:42 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:51:06 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	unsigned char	*ptr2;
 	unsigned int	i;
 
+	if (!s1 || !s2)
+		return (0);
 	ptr1 = (unsigned char *)s1;
 	ptr2 = (unsigned char *)s2;
 	i = 0;

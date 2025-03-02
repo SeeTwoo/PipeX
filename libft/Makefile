@@ -1,6 +1,6 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-DFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -Iincludes
+DFLAGS = -Wall -Wextra -Werror -Iincludes -g
 
 SRC_DIR = src
 SRC_FILES = ft_atoi.c \
@@ -27,6 +27,8 @@ SRC_FILES = ft_atoi.c \
 			ft_putstr_fd.c \
 			ft_split.c \
 			ft_strchr.c \
+			ft_strcmp.c \
+			ft_strcpy.c \
 			ft_strcspn.c \
 			ft_strdup.c \
 			ft_striteri.c \

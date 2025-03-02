@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:41:21 by wbeschon          #+#    #+#             */
-/*   Updated: 2024/11/29 11:41:03 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:57:30 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	ch;
 
+	if (!s)
+		return (NULL);
 	ch = c;
 	while (*s)
 	{

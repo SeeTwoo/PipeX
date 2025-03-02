@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:28:32 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/06 17:00:39 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:48:49 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	ft_printf(char const *s, ...)
 	va_list	arg;
 	int		i;
 
+	if (!s)
+		return (0);
 	va_start(arg, s);
 	i = 0;
 	while (*s)

@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:51:31 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/06 17:00:58 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:55:50 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,14 @@
 
 int	ft_putchar(char c)
 {
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }
 
 int	ft_putstr(char *s)
 {
-	int	i;
-
-	i = 0;
 	if (!s)
 		return (ft_putstr("(null)"));
-	while (*s)
-	{
-		i += ft_putchar(*s);
-		s++;
-	}
-	return (i);
+	return (write(1, s, ft_strlen(s)));
 }
 
 int	ft_putnbr(long long n)

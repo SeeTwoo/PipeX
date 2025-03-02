@@ -6,14 +6,14 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/28 15:50:40 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/02 12:42:48 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
-# include "../libft/src/libft.h"
+# include "libft.h" 
 # include <sys/types.h>
 # include <stdio.h>
 # include <sys/wait.h>
