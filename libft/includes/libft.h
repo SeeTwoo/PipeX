@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:55:42 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 20:28:04 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 21:32:47 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_bit
 int			ft_atoi(const char *src);
 void		ft_bzero(void *src, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
+void		ft_error_msg(char *msg1, char *msg2);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);
 int			ft_isascii(int c);

@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 19:50:23 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 21:31:26 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	clean(t_args *args)
 	args->pids = NULL;
 }
 
-void	error(char *msg, t_args *args)
+void	error(char *msg1, char *msg2, t_args *args)
 {
 	clean(args);
-	perror(msg);
+	ft_error_msg(msg1, msg2);
 	exit(EXIT_FAILURE);
 }

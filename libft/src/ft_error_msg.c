@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_msg.c                                        :+:      :+:    :+:   */
+/*   ft_error_msg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: walter <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 19:58:23 by walter            #+#    #+#             */
-/*   Updated: 2025/03/03 20:35:25 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 21:56:16 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
 #include "libft.h"
-#include <unistd.h>
 
-
-void	error_msg(char *msg1, char *msg2)
+void	ft_error_msg(char *msg1, char *msg2)
 {
 	char	buff[128];
 
@@ -33,10 +30,11 @@ void	error_msg(char *msg1, char *msg2)
 	write(2, buff, ft_strlen(buff));
 }
 
-int	main(int ac, char **av)
+/*int	main(int ac, char **av)
 {
 	if (ac != 3)
 		return (0);
 	error_msg(av[1], av[2]);
 	return (0);
 }
+*/

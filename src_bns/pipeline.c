@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 18:02:25 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 21:22:38 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 void	exec(t_args *args, int in, int out, char *s_cmd)
 {
 	char	**command;
+	char	cmd[32];
 
 	command = get_command(s_cmd, args->paths);
 	if (!command)
-		error("PipeX: parsing failed", args);
+		error(PARSING_FAILED, TRY_AGAIN, args);
 	if (dup2(in, STDIN_FILENO) == -1)
-		error("PipeX: redirection", args);
+		error(REDIR, BAD_FD, args);
 	if (dup2(out, STDOUT_FILENO) == -1)
-		error("PipeX: redirection", args);
+		error(REDIR, BAD_FD, args);
 	close_all(args);
 	clean(args);
 	execve(command[0], command, NULL);
+	ft_strlcpy(cmd, ft_strtok(s_cmd, " "), 32);
 	free_double_array(command);
-	error("PipeX: command not found", args);
+	error(CMD_NOT_FND, cmd, args);
 }
 
 void	setup_exec(t_args *args, int **pipes, int i)
@@ -35,13 +37,13 @@ void	setup_exec(t_args *args, int **pipes, int i)
 	if (i == 0 && args->in)
 	{
 		if (args->in == -1)
-			error("PipeX: infile", args);
+			error(INFILE, DENIED_PERM, args);
 		exec(args, args->in, pipes[0][1], args->commands[i]);
 	}
 	else if (i == args->command_number - 1)
 	{
 		if (args->out == -1)
-			error("PipeX: outfile", args);
+			error(OUTFILE, DENIED_PERM, args);
 		exec(args, pipes[i - 1][0], args->out, args->commands[i]);
 	}
 	else
