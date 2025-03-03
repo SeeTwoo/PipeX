@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:51:57 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 10:30:59 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 12:30:09 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	**get_pipes(int size)
 	int	i;
 
 	pipes = malloc(sizeof(int *) * (size + 1));
+	if (!pipes)
+		return (NULL);
 	i = 0;
 	while (i < size)
 	{

@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 23:50:55 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 12:27:05 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	exec(t_args *args, int in, int out, char *s_cmd)
 	command = get_command(s_cmd, args->paths);
 	if (!command)
 		error("PipeX: parsing failed");
-	dup2(in, STDIN_FILENO);
-	dup2(out, STDOUT_FILENO);
-	close(args->in);
-	close(args->out);
+	if (dup2(in, STDIN_FILENO) == -1)
+		error("PipeX: redirection");
+	if (dup2(out, STDOUT_FILENO) == -1)
+		error("PipeX: redirection");
 	close(in);
 	close(out);
 	execve(command[0], command, NULL);
@@ -31,15 +31,12 @@ void	exec(t_args *args, int in, int out, char *s_cmd)
 
 void	setup_exec(t_args *args, int **pipes, int i)
 {
-	if (i == 0 && args->in == -1)
-		error("infile");
-	else
+	if (i == 0 && args->in)
 		exec(args, args->in, pipes[0][1], args->commands[i]);
-	if (i == args->command_number - 1 && args->out == -1)
-		error("outfile");
-	else
+	else if (i == args->command_number - 1)
 		exec(args, pipes[i - 1][0], args->out, args->commands[i]);
-	exec(args, pipes[i - 1][0], pipes[i][1], args->commands[i]);
+	else
+		exec(args, pipes[i - 1][0], pipes[i][1], args->commands[i]);
 }
 
 void	pipeline(t_args *args)
