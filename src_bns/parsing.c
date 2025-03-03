@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 12:30:22 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 13:13:15 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	**get_command(char *s, char *paths)
 	if (command[0][0] == '/' || !paths)
 		return (command);
 	command_path = get_command_path(command[0], paths);
+	free(command[0]);
 	command[0] = command_path;
 	return (command);
 }

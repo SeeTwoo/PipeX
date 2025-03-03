@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:51:57 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 13:02:17 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 13:41:54 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	**get_pipes(int size)
 
 void	heredoc_init(t_args *args, int ac, char **av, char **envp)
 {
-	args->hd_status = 1;
 	args->ac = ac;
 	args->paths = get_path(envp);
 	args->command_number = ac - 4;
@@ -60,7 +59,6 @@ void	heredoc_init(t_args *args, int ac, char **av, char **envp)
 
 void	init(t_args *args, int ac, char **av, char **envp)
 {
-	args->hd_status = 0;
 	args->ac = ac;
 	args->paths = get_path(envp);
 	args->command_number = ac - 3;

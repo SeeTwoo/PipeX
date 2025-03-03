@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 13:04:34 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 13:41:41 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_args	t_args;
 
 struct s_args
 {
-	int		hd_status;
 	int		command_number;
 	int		in;
 	int		out;
@@ -39,7 +38,6 @@ void	clean(t_args *args);
 void	close_all(t_args *args);
 void	error(char *msg);
 void	exec(t_args *args, int in, int out, char *command);
-char	**get_first_command(char **av, int hd_status);
 void	free_double_array(char **array);
 int		**free_pipes(int **pipes, int i);
 int		get_command_number(int ac, char **av);
