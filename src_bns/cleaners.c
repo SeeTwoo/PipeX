@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 13:03:52 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 13:53:58 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,17 @@ void	close_all(t_args *args)
 {
 	int	i;
 
-	close(args->in);
-	close(args->out);
+	if (args->in != -1)
+		close(args->in);
+	if (args->out != -1)
+		close(args->out);
 	i = 0;
 	while (i < args->command_number - 1)
 	{
-		close(args->pipes[i][0]);
-		close(args->pipes[i][1]);
+		if (args->pipes[i][0] != -1)
+			close(args->pipes[i][0]);
+		if (args->pipes[i][1] != -1)
+			close(args->pipes[i][1]);
 		i++;
 	}
 }
