@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 18:03:25 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 19:50:23 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	close_all(t_args *args)
 		close(args->in);
 	if (args->out != -1)
 		close(args->out);
+	if (!args->pipes)
+		return ;
 	i = 0;
 	while (i < args->command_number - 1)
 	{
@@ -57,7 +59,9 @@ void	clean(t_args *args)
 {
 	close_all(args);
 	free_pipes(args->pipes, args->command_number - 1);
+	args->pipes = NULL;
 	free(args->pids);
+	args->pids = NULL;
 }
 
 void	error(char *msg, t_args *args)
