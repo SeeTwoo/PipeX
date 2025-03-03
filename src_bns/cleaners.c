@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 12:49:35 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 13:03:52 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_double_array(char **array)
 {
 	int	i;
 
+	if (!array)
+		return ;
 	i = 0;
 	while (array[i])
 		free(array[i++]);
@@ -45,6 +47,12 @@ void	close_all(t_args *args)
 		close(args->pipes[i][1]);
 		i++;
 	}
+}
+
+void	clean(t_args *args)
+{
+	free_pipes(args->pipes, args->command_number - 1);
+	free(args->pids);
 }
 
 void	error(char *msg)

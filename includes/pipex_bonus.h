@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 12:50:12 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 13:04:34 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ struct s_args
 	int		*pids;
 };
 
+void	clean(t_args *args);
 void	close_all(t_args *args);
 void	error(char *msg);
 void	exec(t_args *args, int in, int out, char *command);

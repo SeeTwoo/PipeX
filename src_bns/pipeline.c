@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 12:50:48 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 13:06:45 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,7 @@ void	pipeline(t_args *args)
 	args->pids = malloc(sizeof(int) * args->command_number);
 	args->pipes = get_pipes(args->command_number - 1);
 	if (!args->pids || !args->pipes)
-	{
-		free(args->pids);
-		free_pipes(args->pipes, args->command_number - 1);
-		return ;
-	}
+		return (clean(args));
 	i = 0;
 	while (i < args->command_number)
 	{
@@ -61,7 +57,6 @@ void	pipeline(t_args *args)
 	close_all(args);
 	while (--i >= 0)
 		waitpid(args->pids[i], NULL, 0);
-	free(args->pids);
-	free_pipes(args->pipes, args->command_number - 1);
+	clean(args);
 	return ;
 }
