@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 13:53:58 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 18:03:25 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ void	close_all(t_args *args)
 
 void	clean(t_args *args)
 {
+	close_all(args);
 	free_pipes(args->pipes, args->command_number - 1);
 	free(args->pids);
 }
 
-void	error(char *msg)
+void	error(char *msg, t_args *args)
 {
+	clean(args);
 	perror(msg);
 	exit(EXIT_FAILURE);
 }

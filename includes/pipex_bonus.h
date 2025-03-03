@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 13:41:41 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 18:03:50 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ struct s_args
 
 void	clean(t_args *args);
 void	close_all(t_args *args);
-void	error(char *msg);
+void	error(char *msg, t_args *args);
 void	exec(t_args *args, int in, int out, char *command);
 void	free_double_array(char **array);
 int		**free_pipes(int **pipes, int i);
