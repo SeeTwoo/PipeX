@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 13:06:45 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 17:34:06 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	exec(t_args *args, int in, int out, char *s_cmd)
 	if (dup2(out, STDOUT_FILENO) == -1)
 		error("PipeX: redirection");
 	close_all(args);
+	clean(args);
 	execve(command[0], command, NULL);
 	error("PipeX: command not found");
 }
@@ -31,11 +32,21 @@ void	exec(t_args *args, int in, int out, char *s_cmd)
 void	setup_exec(t_args *args, int **pipes, int i)
 {
 	if (i == 0 && args->in)
+	{
+		if (args->in == -1)
+			error("PipeX: infile");
 		exec(args, args->in, pipes[0][1], args->commands[i]);
+	}
 	else if (i == args->command_number - 1)
+	{
+		if (args->out == -1)
+			error("PipeX: outfile");
 		exec(args, pipes[i - 1][0], args->out, args->commands[i]);
+	}
 	else
+	{
 		exec(args, pipes[i - 1][0], pipes[i][1], args->commands[i]);
+	}
 }
 
 void	pipeline(t_args *args)

@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 16:43:42 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 17:32:49 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ char	**get_command(char *s, char *paths)
 		return (command);
 	command_path = get_command_path(command[0], paths);
 	if (!command_path)
-		return (free_double_array(command));
+	{
+		free_double_array(command);
+		return (NULL);
+	}
 	free(command[0]);
 	command[0] = command_path;
 	return (command);
