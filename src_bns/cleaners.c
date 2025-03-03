@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 11:38:50 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 12:49:35 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	**free_pipes(int **pipes, int i)
 	return (NULL);
 }
 
-void	close_all(t_args *args, int **pipes)
+void	close_all(t_args *args)
 {
 	int	i;
 
@@ -41,8 +41,8 @@ void	close_all(t_args *args, int **pipes)
 	i = 0;
 	while (i < args->command_number - 1)
 	{
-		close(pipes[i][0]);
-		close(pipes[i][1]);
+		close(args->pipes[i][0]);
+		close(args->pipes[i][1]);
 		i++;
 	}
 }

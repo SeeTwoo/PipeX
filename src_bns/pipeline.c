@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 12:27:05 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 12:50:48 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	exec(t_args *args, int in, int out, char *s_cmd)
 		error("PipeX: redirection");
 	if (dup2(out, STDOUT_FILENO) == -1)
 		error("PipeX: redirection");
-	close(in);
-	close(out);
+	close_all(args);
 	execve(command[0], command, NULL);
 	error("PipeX: command not found");
 }
@@ -42,23 +41,27 @@ void	setup_exec(t_args *args, int **pipes, int i)
 void	pipeline(t_args *args)
 {
 	int	i;
-	int	*pids;
-	int	**pipes;
 
-	pids = malloc(sizeof(int) * args->command_number);
-	pipes = get_pipes(args->command_number - 1);
-	if (!pids || !pipes)
-		return (free(pids), free(pipes));
+	args->pids = malloc(sizeof(int) * args->command_number);
+	args->pipes = get_pipes(args->command_number - 1);
+	if (!args->pids || !args->pipes)
+	{
+		free(args->pids);
+		free_pipes(args->pipes, args->command_number - 1);
+		return ;
+	}
 	i = 0;
 	while (i < args->command_number)
 	{
-		pids[i] = fork();
-		if (pids[i] == 0)
-			setup_exec(args, pipes, i);
+		args->pids[i] = fork();
+		if (args->pids[i] == 0)
+			setup_exec(args, args->pipes, i);
 		i++;
 	}
-	close_all(args, pipes);
+	close_all(args);
 	while (--i >= 0)
-		waitpid(pids[i], NULL, 0);
+		waitpid(args->pids[i], NULL, 0);
+	free(args->pids);
+	free_pipes(args->pipes, args->command_number - 1);
 	return ;
 }
