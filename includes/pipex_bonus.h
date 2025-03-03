@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:31:46 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/02 23:50:18 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/03 10:35:55 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*get_infile(char **av);
 char	*get_path(char **envp);
 int		**get_pipes(int size);
 int		heredoc(char *limiter);
-int		heredoc_status(char **av);
+void	heredoc_init(t_args *args, int ac, char **av, char **envp);
 void	init(t_args *args, int ac, char **av, char **envp);
 void	pipeline(t_args *args);
 void	print_double_array(char **array);
