@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:50 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/03 21:22:38 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/04 09:59:40 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	exec(t_args *args, int in, int out, char *s_cmd)
 	execve(command[0], command, NULL);
 	ft_strlcpy(cmd, ft_strtok(s_cmd, " "), 32);
 	free_double_array(command);
+	if (!args->paths)
+		error(ENV_NOT_FND, cmd, args);
 	error(CMD_NOT_FND, cmd, args);
 }
 

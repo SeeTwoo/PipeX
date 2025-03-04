@@ -6,7 +6,7 @@
 /*   By: walter <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:10:23 by walter            #+#    #+#             */
-/*   Updated: 2025/03/03 21:22:45 by walter           ###   ########.fr       */
+/*   Updated: 2025/03/04 09:58:18 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define OUTFILE "Outfile"
 
 # define CMD_NOT_FND "Command not found"
+# define ENV_NOT_FND "Command not found (no environment provided)"
 
 # define TRY_AGAIN "Try again"
 
