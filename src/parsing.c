@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/04 11:24:06 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:43:04 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**get_command(char *s, char *paths)
 
 	if (!s[0])
 		return (NULL);
-	command= ft_split(s, " ");
+	command = ft_split(s, " ");
 	if (!command)
 		return (NULL);
 	if (command[0][0] == '/' || !paths)
