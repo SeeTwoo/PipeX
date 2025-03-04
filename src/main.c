@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:40:21 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/04 11:26:44 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/04 17:34:03 by walter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	exec(t_args *args, int in, int out, char *s_cmd)
 	char	**command;
 	char	cmd[32];
 
-	if (!s_cmd[0])
+	if (!s_cmd[0] || ft_strlen(s_cmd) == ft_strspn(s_cmd, "\t\n\v\f\r "))
 		error(CMD_NOT_FND, "you did not type any command", args);
 	command = get_command(s_cmd, args->paths);
 	if (!command)
