@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:11:38 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/20 15:51:40 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:48:31 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ typedef struct s_args	t_args;
 
 struct s_args
 {
+	int		in;
+	int		out;
 	int		ac;
-	char	**av;
-	char	**paths;
-	char	**command;
+	char	**commands;
+	char	*paths;
+	int		pipefd[2];
+	int		pids[2];
 };
 
 void	close_tab(int *tab, size_t size);

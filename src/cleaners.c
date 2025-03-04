@@ -5,65 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 11:09:48 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/20 12:48:16 by wbeschon         ###   ########.fr       */
+/*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
+/*   Updated: 2025/03/04 11:01:33 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-char	**free_double_array(char **tab)
+void	free_double_array(char **array)
 {
 	int	i;
 
-	if (!tab)
-		return (NULL);
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (NULL);
-}
-
-t_args	*free_args(t_args *args)
-{
-	if (!args)
-		return (NULL);
-	if (args->paths)
-		free_double_array(args->paths);
-	if (args->command)
-		free_double_array(args->command);
-	free(args);
-	return (NULL);
-}
-
-void	close_tab(int *tab, size_t size)
-{
-	size_t	i;
-
-	if (!tab)
+	if (!array)
 		return ;
 	i = 0;
-	while (i < size)
-	{
-		close(tab[i]);
-		i++;
-	}
+	while (array[i])
+		free(array[i++]);
+	free(array);
 }
 
-void	wait_tab(pid_t *tab, size_t size)
+void	close_all(t_args *args)
 {
-	size_t	i;
+	int	i;
 
-	if (!tab)
-		return ;
-	i = 0;
-	while (i < size)
-	{
-		waitpid(tab[i], NULL, 0);
-		i++;
-	}
+	if (args->in != -1)
+		close(args->in);
+	if (args->out != -1)
+		close(args->out);
+	if (args->pipefd[0] != -1)
+		close(args->pipefd[0]);
+	if (args->pipefd[1] != -1)
+		close(args->pipefd[1]);
+}
+
+void	error(char *msg1, char *msg2, t_args *args)
+{
+	close_all(args);
+	ft_error_msg(msg1, msg2);
+	exit(EXIT_FAILURE);
 }

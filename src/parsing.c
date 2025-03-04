@@ -5,87 +5,77 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 11:08:07 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/02/26 09:17:31 by wbeschon         ###   ########.fr       */
+/*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
+/*   Updated: 2025/03/04 10:59:07 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-char	*get_command_path(char *command, char **paths)
+char	*get_path(char **envp)
 {
-	char	*current_path;
-	char	*temp;
-
-	if (access(command, X_OK) == 0)
-		return (command);
-	temp = ft_strjoin("/", command);
-	if (!temp)
+	if (!envp[0])
 		return (NULL);
-	while (*paths)
-	{
-		current_path = ft_strjoin(*paths, temp);
-		if (access(current_path, X_OK) == 0)
-		{
-			free(temp);
-			return (current_path);
-		}
-		paths++;
-		free(current_path);
-		current_path = NULL;
-	}
-	free(temp);
-	return (command);
+	while (*envp && ft_strncmp(*envp, "PATH=", 5) != 0)
+		envp++;
+	if (!(*envp))
+		return (NULL);
+	return (&((*envp)[5]));
 }
 
-char	**get_command(char *s, char **paths)
+void	init(t_args *args, int ac, char **av, char **envp)
+{
+	args->ac = ac;
+	args->paths = get_path(envp);
+	args->commands = &av[2];
+	args->in = open(av[1], O_RDONLY);
+	args->out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+}
+
+char	*get_command_path(char *s, char *paths)
+{
+	char	*temp;
+	char	*token;
+	char	*paths_dup;
+	char	*current_path;
+
+	paths_dup = ft_strdup(paths);
+	temp = ft_strjoin("/", s);
+	if (!temp || !paths_dup)
+		return (free(paths_dup), free(temp), NULL);
+	token = ft_strtok(paths_dup, ":");
+	while (token)
+	{
+		current_path = ft_strjoin(token, temp);
+		if (access(current_path, X_OK) == 0)
+			return (free(paths_dup), free(temp), current_path);
+		free(current_path);
+		token = ft_strtok(NULL, ":");
+	}
+	free(temp);
+	free(paths_dup);
+	return (ft_strdup(s));
+}
+
+char	**get_command(char *s, char *paths)
 {
 	char	**command;
 	char	*command_path;
 
-	command = ft_split(s, " ");
-	if (!command || !command[0])
-		return (free_double_array(command));
-	if (access(command[0], X_OK) == 0)
+	if (!s[0])
+		return (NULL);
+	command= ft_split(s, " ");
+	if (!command)
+		return (NULL);
+	if (command[0][0] == '/' || !paths)
 		return (command);
 	command_path = get_command_path(command[0], paths);
 	if (!command_path)
-		return (free_double_array(command));
-	command[0] = command_path;
-	return (command);
-}
-
-char	*get_path(char **envp)
-{
-	char	*path;
-	int		i;
-
-	if (!envp[0])
 	{
-		printf("no environment found\n");
+		free_double_array(command);
 		return (NULL);
 	}
-	i = 0;
-	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
-		i++;
-	if (!envp[i])
-		return (NULL);
-	path = &envp[i][5];
-	return (path);
-}
-
-t_args	*parsing(int ac, char **av, char **envp)
-{
-	t_args	*args;
-
-	args = malloc(sizeof(t_args));
-	if (!args || ac != 5)
-		return (NULL);
-	args->ac = ac;
-	args->av = av;
-	args->paths = ft_split(get_path(envp), ":");
-	args->command = NULL;
-	if (!args->paths)
-		return (free_args(args));
-	return (args);
+	free(command[0]);
+	command[0] = command_path;
+	return (command);
 }
