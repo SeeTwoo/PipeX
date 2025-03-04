@@ -6,11 +6,11 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:50:11 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/04 11:01:33 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:15:11 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "pipex.h"
 
 void	free_double_array(char **array)
 {
@@ -26,8 +26,6 @@ void	free_double_array(char **array)
 
 void	close_all(t_args *args)
 {
-	int	i;
-
 	if (args->in != -1)
 		close(args->in);
 	if (args->out != -1)

@@ -6,11 +6,11 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/04 10:59:07 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:14:06 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "pipex.h"
 
 char	*get_path(char **envp)
 {
