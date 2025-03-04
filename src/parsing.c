@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:46:25 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/04 11:14:06 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:24:06 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init(t_args *args, int ac, char **av, char **envp)
 	args->paths = get_path(envp);
 	args->commands = &av[2];
 	args->in = open(av[1], O_RDONLY);
-	args->out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	args->out = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 }
 
 char	*get_command_path(char *s, char *paths)

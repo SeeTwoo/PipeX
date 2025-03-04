@@ -6,7 +6,7 @@
 /*   By: wbeschon <wbeschon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:40:21 by wbeschon          #+#    #+#             */
-/*   Updated: 2025/03/04 11:22:04 by wbeschon         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:24:33 by wbeschon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	setup_exec(t_args *args, int *pipefd, int i)
 	{
 		if (args->in == -1)
 			error(INFILE, DENIED_PERM, args);
-		exec(args, args->in, pipefd[1], args->commands[2]);
+		exec(args, args->in, pipefd[1], args->commands[0]);
 	}
 	else
 	{
